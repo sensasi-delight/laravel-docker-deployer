@@ -9,26 +9,15 @@ volumes:
 
 services:
   laravel:
-    build:
-      args:
-        PHP_VERSION: ${PHP_VERSION}
-        GIT_REPO_URL: ${GIT_REPO_URL}
-        APP_NAME: ${APP_NAME}
-        APP_UID: 1000
-      context: ./
-      dockerfile: php-dockerfiles/${PHP_VERSION}.dockerfile
-    image: ${APP_NAME}-laravel
-    container_name: ${APP_NAME}-laravel
+    image: sensasidelight/php-laravel:${PHP_VERSION:?}
     restart: unless-stopped
-    working_dir: /var/www/${APP_NAME}
     environment:
-      APP_NAME: ${APP_NAME}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_USER: ${MYSQL_USER}
-      DATABASE_NAME: ${DATABASE_NAME}
+      - USER=${COMPOSE_PROJECT_NAME:?}
+    working_dir: /var/www
     volumes:
-      - laravel-dir:/var/www/${APP_NAME}:delegated
-      - ./config/laravel.env:/var/www/${APP_NAME}/.env:cached
+      - laravel-dir:/var/www:delegated
+      - ./app_src:/home/${COMPOSE_PROJECT_NAME:?}/app_src:cached
+      - ./.env:/var/www/.env:cached
       - ./entrypoints/php-entrypoint.sh:/usr/local/bin/docker-php-entrypoint:cached
       - ./entrypoints/db_checks.php:/usr/local/bin/db_checks.php:cached
     networks:
@@ -38,13 +27,12 @@ services:
         condition: service_healthy
 
   mysql:
-    image: mysql:${MYSQL_VERSION}
-    container_name: ${APP_NAME}-mysql
+    image: mysql:${MYSQL_VERSION:?}
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?}
+      MYSQL_USER: ${DB_USERNAME:?}
+      MYSQL_PASSWORD: ${DB_PASSWORD:?}
     volumes:
       - mysql-data:/var/lib/mysql:delegated
     networks:
@@ -57,13 +45,12 @@ services:
       retries: 55
 
   nginx:
-    image: nginx:${NGINX_VERSION}
-    container_name: ${APP_NAME}-nginx
+    image: nginx:${NGINX_VERSION:?}
     restart: unless-stopped
     ports:
-      - ${PORT:-80}:80
+      - ${APP_PORT:-80}:80
     volumes:
-      - laravel-dir:/var/www/${APP_NAME}:delegated
+      - laravel-dir:/var/www:delegated
       - ./config/nginx.conf:/etc/nginx/conf.d/default.conf:cached
     networks:
       - app-net
