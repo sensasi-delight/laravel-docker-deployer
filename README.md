@@ -23,7 +23,7 @@ Currently the Laravel Docker Deployer is only has `php:7.4-fpm` which supported 
 
 - Support private repository.
 
-Any suggestion? [open new issue!](issues/).
+Any suggestion? [open new issue!](../../issues).
 
 ## How to use
 
