@@ -2,8 +2,6 @@
 
 Just a docker-compose file for the easiest Laravel application deployment with PHP, MySQL and NGINX (LEMP) stack. From git hosting to your production machine under Docker environment. Optimized for Laravel production environment.
 
-Currently the Laravel Docker Deployer is only has `php:7.4-fpm` which supported for Laravel 6-8. Another flavours still on progress. ~~buy me a coffee~~
-
 > This document is also available on another languages, please visit the [readmes folder](readmes/).
 
 ## Features
@@ -11,17 +9,13 @@ Currently the Laravel Docker Deployer is only has `php:7.4-fpm` which supported 
 - Easy-to-use
 - Clone from Git or copy from local automatically.
 - Support multi database.
-
-### Planned Features
-
-- Various PHP flavours & version.
-	- 7.4-fpm-alpine.
-	- 8.0-fpm.
-	- 8.0-fpm-alpine.
-	- 8.1-fpm.
-	- 8.1-fpm-alpine.
-
-- Support private repository.
+- Available PHP version
+	- [x] 7.4-fpm.
+	- [ ] 7.4-fpm-alpine.
+	- [x] 8.0-fpm.
+	- [ ] 8.0-fpm-alpine.
+	- [x] 8.1-fpm.
+	- [ ] 8.1-fpm-alpine.
 
 Any suggestion? [open new issue!](../../issues).
 
