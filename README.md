@@ -22,7 +22,7 @@ Any suggestion? [open new issue!](../../issues).
 ## How to use
 
 1. Clone or download this repository.
-2. Edit the `.env` file inside this repository, fill all variables that you need for your Laravel application on production environment. All mandatory and optional variables has been described on the `.env` file.
+2. Copy the `.env.example` and rename to `.env`, fill all variables that you need for your Laravel application on production environment. All mandatory and optional variables has been described inside the file.
 3. Run `docker-compose up --d` and wait for the all containers to be started.
 4. Done 🎉 your application has been served on your machine by now.
 
