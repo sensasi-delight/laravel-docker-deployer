@@ -1,18 +1,29 @@
 <?php
 
-$USER = $argv[1];
+declare(strict_types=1);
+
+function fetchColumn(PDO $dbh, string $conditions): int
+{
+	return (int) $dbh->query("SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE {$conditions}")->fetchColumn();
+}
+
+function migrate(): void
+{
+	print_r("Migrating db\r\n");
+	passthru('php artisan migrate --force');
+}
+
+$USER 		   = $argv[1];
 $ROOT_PASSWORD = $argv[2];
-$MYSQL_USER = $argv[3];
+$MYSQL_USER    = $argv[3];
 $DATABASE_NAME = $argv[4];
 
-$dbh = new PDO("mysql:host=mysql", 'root', $ROOT_PASSWORD);
+$dbh 		   = new PDO("mysql:host=mysql", 'root', $ROOT_PASSWORD);
+$databases     = explode("\n", $DATABASE_NAME);
+$query         = '';
+$where         = [];
 
-$databases = explode("\n", $DATABASE_NAME);
-
-$query = '';
-$where = [];
-
-foreach($databases as $dbName) {
+foreach ($databases as $dbName) {
 	$query .= "CREATE DATABASE IF NOT EXISTS $dbName;
 		GRANT ALL PRIVILEGES ON $dbName.* TO '$MYSQL_USER'@'%';";
 
@@ -21,22 +32,20 @@ foreach($databases as $dbName) {
 
 $query .= 'FLUSH PRIVILEGES';
 
-echo "creating and granting databases if is not exists\n";
+echo "Creating and granting databases if is not exists\n";
+
 $dbh->exec($query);
 
 $where = implode(' or ', $where);
 
-print_r("checking db table(s)\n");
-$nRows = $dbh->query("SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE $where")->fetchColumn();
-	
-if ($nRows <= 1) {
-	print_r("migrating db\r\n");
-	passthru('php artisan migrate --force');
+print_r("Checking db table(s)\n");
+
+if (fetchColumn($dbh, $where) <= 1) {
+	migrate();
 }
 
 // check if migration is failed
-$nRows = $dbh->query("SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE $where")->fetchColumn();
-if ($nRows <= 1) {
+if (fetchColumn($dbh, $where) <= 1) {
 	throw new Exception("Migration Failed");
 }
 
