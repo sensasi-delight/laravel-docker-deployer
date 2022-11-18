@@ -11,11 +11,11 @@ Just a docker-compose file for the easiest Laravel application deployment with P
 - Support multi database.
 - Available PHP version
 	- [x] 7.4-fpm.
-	- [ ] 7.4-fpm-alpine.
+	- [x] 7.4-fpm-alpine.
 	- [x] 8.0-fpm.
-	- [ ] 8.0-fpm-alpine.
+	- [x] 8.0-fpm-alpine.
 	- [x] 8.1-fpm.
-	- [ ] 8.1-fpm-alpine.
+	- [x] 8.1-fpm-alpine.
 
 Any suggestion? [open new issue!](../../issues).
 
@@ -23,8 +23,13 @@ Any suggestion? [open new issue!](../../issues).
 
 1. Clone or download this repository.
 2. Copy the `.env.example` and rename to `.env`, fill all variables that you need for your Laravel application on production environment. All mandatory and optional variables has been described inside the file.
-3. Run `docker-compose up --d` and wait for the all containers to be started.
+3. Run `docker-compose up -d` and wait until all containers has been started.
 4. Done 🎉 your application has been served on your machine by now.
+
+## Preparation
+
+1. Make sure the Docker has been installed on your system. if the Docker not installed yet please visit [this link](https://docs.docker.com/engine/install/) for installation guide.
+2. Make sure the `folder structure` of your Laravel application is complies to the Laravel standard.
 
 ## Contributing
 
