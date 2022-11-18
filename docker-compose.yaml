@@ -11,8 +11,6 @@ services:
   laravel:
     image: sensasidelight/php-laravel:${PHP_VERSION:?}
     restart: unless-stopped
-    environment:
-      - USER=${COMPOSE_PROJECT_NAME:?}
     working_dir: /var/www
     volumes:
       - laravel-dir:/var/www:delegated
