@@ -46,7 +46,7 @@ services:
     image: nginx:${NGINX_VERSION:?}
     restart: unless-stopped
     ports:
-      - ${APP_PORT:-80}:80
+      - ${PORT:-80}:80
     volumes:
       - laravel-dir:/var/www:delegated
       - ./config/nginx.conf:/etc/nginx/conf.d/default.conf:cached
