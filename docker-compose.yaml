@@ -1,7 +1,4 @@
-version: "3.8"
-
-networks:
-  app-net:
+version: "3.9"
 
 volumes:
   laravel-dir:
@@ -16,8 +13,6 @@ services:
       - laravel-dir:/var/www:delegated
       - ${APP_SRC_LOCAL:-./}:/home/${COMPOSE_PROJECT_NAME:?}/app_src:cached
       - ./.env:/var/www/.env:cached
-    networks:
-      - app-net
     depends_on:
       mysql:
         condition: service_healthy
@@ -31,8 +26,6 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD:?}
     volumes:
       - mysql-data:/var/lib/mysql:delegated
-    networks:
-      - app-net
     healthcheck:
       test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
       start_period: 5s
@@ -48,7 +41,5 @@ services:
     volumes:
       - laravel-dir:/var/www:delegated
       - ./config/nginx.conf:/etc/nginx/conf.d/default.conf:cached
-    networks:
-      - app-net
     depends_on:
       - laravel
