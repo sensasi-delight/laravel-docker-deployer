@@ -22,7 +22,7 @@ Ingin menyarankan fitur? [klik di sini](https://github.com/sensasi-delight/larav
 4. Jalankan perintah `docker-compose up -d` kemudian tunggu hingga semua docker container berjalan.
 5. Selesai 🎉 aplikasi anda telah ter-*deploy* dan dapat diakses pada *browser* melalui alamat URL: `localhost`.
 
-> Video demonstrasi: coming soon
+> Video demonstrasi: https://youtu.be/W5Cng_NY2p0
 
 ## Daftar Variabel .env
 

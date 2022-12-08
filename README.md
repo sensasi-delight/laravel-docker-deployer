@@ -29,7 +29,7 @@ Any suggestion? [open new issue!](https://github.com/sensasi-delight/laravel-doc
 3. Run `docker-compose up -d` and wait until all containers has been started.
 4. Done 🎉 your application has been served on your machine by now.
 
-> Demostration video: coming soon
+> Demostration video (Bahasa Indonesia): https://youtu.be/W5Cng_NY2p0
 
 ## .env Variables
 
