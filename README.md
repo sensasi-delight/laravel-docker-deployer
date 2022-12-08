@@ -6,18 +6,16 @@ Just a docker-compose file for the easiest Laravel application deployment with P
 
 ## Features
 
-- Easy-to-use
-- Clone from Git or copy from local automatically.
+- Deploy Laravel app from git hosting or local folder automatically.
 - Support multi database.
-- Available PHP version
-	- [x] 7.4-fpm.
-	- [x] 7.4-fpm-alpine.
-	- [x] 8.0-fpm.
-	- [x] 8.0-fpm-alpine.
-	- [x] 8.1-fpm.
-	- [x] 8.1-fpm-alpine.
+- support various PHP version. click [this link](https://hub.docker.com/repository/docker/sensasidelight/php-laravel/tags) to see all available PHP version.
 
-Any suggestion? [open new issue!](../../issues).
+### Planned
+
+- Clone from private git repository.
+- Expose container's IP to public.
+
+Any suggestion? [open new issue!](https://github.com/sensasi-delight/laravel-docker-deployer/issues/new).
 
 ## How to use
 
@@ -31,6 +29,8 @@ Any suggestion? [open new issue!](../../issues).
 3. Run `docker-compose up -d` and wait until all containers has been started.
 4. Done 🎉 your application has been served on your machine by now.
 
+> Demostration video: coming soon
+
 ## .env Variables
 
 As you can see, this repository have the `.env.example` file for basic guide of create you `.env` file.
@@ -42,16 +42,18 @@ The list of `.env` variables that used by Laravel Docker Deployer are shown on t
 | PHP_VERSION        |         | Mandatory. All available versions can be seen on: https://hub.docker.com/r/sensasidelight/php-laravel/tags ⚠️ Make sure it's compatible with your Laravel php version.                                                                                                                                                                                                                                                                                |
 | MYSQL_VERSION      |         | Mandatory. All available versions can be seen on: https://hub.docker.com/_/mysql/tags                                                                                                                                                                                                                                                                                                                                           |
 | NGINX_VERSION      |         | Mandatory. All available versions can be seen on: https://hub.docker.com/_/nginx/tags                                                                                                                                                                                                                                                                                                                                          |
-| APP_SRC_GIT        |         | Mandatory if you want to clone the project using git. ⚠️ please deactivate the `APP_SRC_LOCAL` variable if you want to using this. value examples: - https://github.com/[your-username]/[your-project-name] - https://github.com/[your-username]/[your-project-name].git - https://[your-username]:[your-password]@github.com/[your-project-name].git - ../path/to/your/awesome/project/.git |
+| APP_SRC_GIT        |         | Mandatory if you want to clone the project using git. ⚠️ please deactivate the `APP_SRC_LOCAL` variable if you want to using this. value examples: https://github.com/laravel/laravel, ../path/to/your/awesome/project/.git |
 | APP_SRC_GIT_BRANCH |         | Optional.                                                                                                                                                                                                                                                                                                                                                                                   |
-| APP_SRC_LOCAL      |         | Mandatory if you want to copy-paste the project from your local directory. ⚠️ Please deactivate the `APP_SRC_GIT` variable if you want to using this.  example: - ../path/to/your/awesome/project                                                                                                                                                                                            |
+| APP_SRC_LOCAL      |         | Mandatory if you want to copy-paste the project from your local directory. ⚠️ Please deactivate the `APP_SRC_GIT` variable if you want to using this.  example: `../path/to/your/awesome/project`                                                                                                                                                                                            |
 | DB_ROOT_PASSWORD   |         | Mandatory.                                                                                                                                                                                                                                                                                                                                                                                  |
 | PORT               | 80      | Optional. Binded port on docker host.                                                                                                                                                                                                                                                                                                                                                       |
 | SEED_DB            | false   | Optional. Seeding is only for testing. Your production environment shouldn't seed the database. ⚠️ If you are insist to seed the database, make sure all required packages (e.g `faker/faker`) is required on `composer.json`, not on `require-dev`                                                                                                                                                   |
-| DB_DATABASE*       | forge   | Optional. If your application use multiple database, just add new `[*]DB_DATABASE[*]` variable on the `.env` file. example: - ***SECOND_***DB_DATABASE=forge_2 - DB_DATABASE***_LOG***=forge_log                                                                                                                                                                                            |
+| DB_DATABASE*       | forge   | Optional. If your application use multiple database, just add new `*_DB_DATABASE_*` variable on the `.env` file. examples: `SECOND_DB_DATABASE=forge_2`, `DB_DATABASE_LOG=forge_log`                                                                                                                                                                                            |
 | DB_HOST*           | mysql   | Mandatory. Please don't change the value.                                                                                                                                                                                                                                                                                                                                                   |
 | DB_USERNAME*       |         | Mandatory. ⚠️ Please don't fill this variable with `root` value                                                                                                                                                                                                                                                                                                                              |
 | DB_PASSWORD*       |         | Mandatory.                                                                                                                                                                                                                                                                                                                                                                                  |
+
+*: Also used by by Laravel
 
 ## Contributing
 
@@ -71,4 +73,6 @@ The code is released under the MIT license.
 
 ## Contact
 
-Email - [zainadam.id@gmail.com](mailto:zainadam.id+gh+readme@gmail.com?subject=[GitHub]%20Laravel%20Docker%20Deployer)
+📧 e-mail - [zainadam.id@gmail.com](mailto:zainadam.id+gh+readme@gmail.com?subject=[GitHub]%20Laravel%20Docker%20Deployer)
+
+🐦 Twitter: [@SENSASI_delight](https://twitter.com/SENSASI_delight)
