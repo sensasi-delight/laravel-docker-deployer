@@ -12,7 +12,7 @@ services:
     volumes:
       - laravel-dir:/var/www:delegated
       - ${APP_SRC_LOCAL:-./}:/home/${COMPOSE_PROJECT_NAME:?}/app_src:cached
-      - ./.env:/var/www/.env:cached
+      - ./.env:/var/www/.env:delegated
     depends_on:
       mysql:
         condition: service_healthy
